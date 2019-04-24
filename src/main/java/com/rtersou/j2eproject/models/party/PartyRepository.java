@@ -1,4 +1,4 @@
-package com.rtersou.j2eproject.models.Party;
+package com.rtersou.j2eproject.models.party;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

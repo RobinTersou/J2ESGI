@@ -16,10 +16,10 @@ public class CardController {
         this.repository = repository;
     }
 
-    /** Get All users **/
-    @GetMapping("/cards")
-    List<Card> all() {
-        return repository.findAll();
+    /** Get All cards from a user **/
+    @GetMapping("/cards/user/{id_user}")
+    List<Card> all(@PathVariable Long id_user) {
+        return repository.findById_user(id_user);
     }
 
 

@@ -18,9 +18,9 @@ public class TasteUserController {
     }
 
     /** Get All parties **/
-    @GetMapping("/tasteUser")
-    List<TasteUser> all() {
-        return repository.findAll();
+    @GetMapping("/tasteUser/{user_id}")
+    List<TasteUser> all(@PathVariable Long id) {
+        return repository.findById_user(id);
     }
 
     /** Post Party **/

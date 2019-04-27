@@ -1,6 +1,8 @@
 package com.rtersou.j2eproject.controllers;
 
 import com.rtersou.j2eproject.Exceptions.PartyNotFoundException;
+import com.rtersou.j2eproject.models.card.Card;
+import com.rtersou.j2eproject.models.card.CardRepository;
 import com.rtersou.j2eproject.models.user.User;
 import com.rtersou.j2eproject.models.user.UserRepository;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +31,7 @@ public class UserController {
         return repository.save(newUser);
     }
 
-    /** Get one party **/
+    /** Get one user **/
     @GetMapping("/users/{id}")
     User one(@PathVariable Long id) {
         return repository.findById(id)

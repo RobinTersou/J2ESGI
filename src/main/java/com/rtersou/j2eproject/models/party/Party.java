@@ -19,7 +19,7 @@ public class Party {
     private String photo_max_url;
     private String description;
 
-    public Party(){};
+    public Party(){}
 
     public Party(String name, Date date_start, Date date_end, String address, String photo_min_url, String photo_max_url, String description) {
         this.name = name;

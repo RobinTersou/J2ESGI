@@ -18,7 +18,12 @@ public class User {
     private String photo_url;
     private String email;
 
-    public User(){}
+    public User(){
+        this.lastname = "TEST";
+        this.firstname = "Test";
+        this.email = "test@test.fr";
+
+    }
 
     public User(Long id_type_user, String lastname, String firstname, String photo_url, String email) {
         this.id_type_user = id_type_user;

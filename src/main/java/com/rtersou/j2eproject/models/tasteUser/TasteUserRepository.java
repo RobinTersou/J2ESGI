@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface TasteUserRepository extends JpaRepository<TasteUser, Long> {
 
-    List<TasteUser> findById_user(Long id);
+    //List<TasteUser> findById_user(Long id);
 }

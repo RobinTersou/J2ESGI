@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface CardRepository extends JpaRepository<Card, Long> {
 
-    List<Card> findById_user(Long id);
 
 
 }

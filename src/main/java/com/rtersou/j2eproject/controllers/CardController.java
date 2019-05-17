@@ -17,10 +17,10 @@ public class CardController {
     }
 
     /** Get All cards from a user **/
-    @GetMapping("/cards/user/{id_user}")
-    List<Card> all(@PathVariable Long id_user) {
-        return repository.findById_user(id_user);
-    }
+    //@GetMapping("/cards/user/{id_user}")
+    //List<Card> all(@PathVariable Long id_user) {
+      //  return repository.findById_user(id_user);
+    //}
 
 
     /** Post user **/

@@ -4,6 +4,7 @@ import com.rtersou.j2eproject.Exceptions.PartyNotFoundException;
 import com.rtersou.j2eproject.models.party.Party;
 import com.rtersou.j2eproject.models.party.PartyRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @RestController
 public class PartyController {
 
+    @Autowired
     private final PartyRepository repository;
 
     public PartyController(PartyRepository repository) {

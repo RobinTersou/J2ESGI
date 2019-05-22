@@ -6,9 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class J2eprojectApplication extends SpringBootServletInitializer  {
 
+
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(Application.class);
+		return application.sources(J2eprojectApplication.class);
 	}
 
 	public static void main(String[] args) {

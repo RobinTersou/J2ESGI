@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 @RestController
 public class HomeController {
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public Collection<String> sayHello() {
         return IntStream.range(0, 10)
                 .mapToObj(i -> "Hello number " + i)

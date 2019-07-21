@@ -1,25 +1,49 @@
 package com.rtersou.j2eapp.models;
 
-import lombok.Data;
-import org.springframework.stereotype.Component;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 import java.util.Date;
 
-@Data
 @Entity
-@Component
-public class Party {
-    private @Id
-    @GeneratedValue
+@Table(name = "party")
+@EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
+        allowGetters = true)
+public class Party implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
             Long id;
+
+    @NotBlank
     private String name;
+
+    @NotBlank
     private Float lng;
+
+    @NotBlank
     private Float lat;
+
+    @NotBlank
     private Date date_start;
+
+    @NotBlank
     private Date date_end;
+
+    @Column(nullable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    private Date createdAt;
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+    private Date updatedAt;
 
     public Party(){}
 

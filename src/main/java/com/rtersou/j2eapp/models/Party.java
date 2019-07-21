@@ -6,11 +6,13 @@ import org.springframework.stereotype.Component;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Data
 @Entity
 @Component
+@Table(name = "party")
 public class Party {
     private @Id
     @GeneratedValue

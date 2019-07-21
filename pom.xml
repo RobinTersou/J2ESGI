@@ -38,7 +38,7 @@
 	</properties>
 	<!--
 	<profiles>
-		<!-- Local profile
+		 Local profile
 		<profile>
 			<id>local</id>
 			<build>
@@ -60,7 +60,7 @@
 				</plugins>
 			</build>
 		</profile>
-		<!-- Re7 profile
+		Re7 profile
 		<profile>
 			<id>recette</id>
 			<build>

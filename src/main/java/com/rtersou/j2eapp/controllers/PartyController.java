@@ -1,45 +1,72 @@
 package com.rtersou.j2eapp.controllers;
 
 
+import com.rtersou.j2eapp.Exceptions.ResourceNotFoundException;
 import com.rtersou.j2eapp.models.PartyRepository;
 import com.rtersou.j2eapp.models.Party;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/parties")
 public class PartyController {
 
-    private final PartyRepository repository;
+    @Autowired
+    PartyRepository partyRepository;
 
-    public PartyController(PartyRepository repository) {
-        this.repository = repository;
+    // Get all parties
+    @GetMapping("/")
+    public List<Party> getAllParties() {
+        return partyRepository.findAll();
     }
 
-    //@GetMapping("/parties")
-    //List<Party> all() {
-    //    return repository.findAll();
-    //}
-
-    @PostMapping("/party")
-    Party newParty(@RequestBody Party newParty) {
-        return repository.save(newParty);
-    }
-    /*
-    @ResponseBody
-    public String create(String email, String name) {
-        String userId = "";
-        try {
-            User user = new User(email, name);
-            userDao.save(user);
-            userId = String.valueOf(user.getId());
-        }
-        catch (Exception ex) {
-            return "Error creating the user: " + ex.toString();
-        }
-        return "User succesfully created with id = " + userId;
+    // Get one party
+    @GetMapping("/{id}")
+    public Party getPartyById(@PathVariable(value = "id") Long partyId) {
+        return partyRepository.findById(partyId)
+                .orElseThrow(() -> new ResourceNotFoundException("Note", "id", partyId));
     }
 
-     */
+    // Create party
+    @PostMapping("/")
+    public Party createParty(@Valid @RequestBody Party party) {
+        return partyRepository.save(party);
+    }
+
+    // Update party
+
+    @PutMapping("/{id}")
+    public Party updateParty(@PathVariable(value = "id") Long partyId,
+                           @Valid @RequestBody Party partyDetails) {
+
+        Party party = partyRepository.findById(partyId)
+                .orElseThrow(() -> new ResourceNotFoundException("Note", "id", partyId));
+
+        party.setName(partyDetails.getName());
+        party.setLat(partyDetails.getLat());
+        party.setLng(partyDetails.getLng());
+        party.setDate_end(partyDetails.getDate_end());
+        party.setDate_start(partyDetails.getDate_start());
+
+        Party updateParty = partyRepository.save(party);
+        return updateParty;
+    }
+
+    // Delete a Party
+    @DeleteMapping("/notes/{id}")
+    public ResponseEntity<?> deleteParty(@PathVariable(value = "id") Long partyId) {
+        Party note = partyRepository.findById(partyId)
+                .orElseThrow(() -> new ResourceNotFoundException("Note", "id", partyId));
+
+        partyRepository.delete(note);
+
+        return ResponseEntity.ok().build();
+    }
+
+
 
 }

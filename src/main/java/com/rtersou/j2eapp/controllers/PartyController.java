@@ -12,34 +12,34 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/parties")
+@RequestMapping("/")
 public class PartyController {
 
     @Autowired
     PartyRepository partyRepository;
 
     // Get all parties
-    @GetMapping("/")
+    @GetMapping("/parties")
     public List<Party> getAllParties() {
         return partyRepository.findAll();
     }
 
     // Get one party
-    @GetMapping("/{id}")
+    @GetMapping("/parties/{id}")
     public Party getPartyById(@PathVariable(value = "id") Long partyId) {
         return partyRepository.findById(partyId)
                 .orElseThrow(() -> new ResourceNotFoundException("Note", "id", partyId));
     }
 
     // Create party
-    @PostMapping("/")
+    @PostMapping("/parties")
     public Party createParty(@Valid @RequestBody Party party) {
         return partyRepository.save(party);
     }
 
     // Update party
 
-    @PutMapping("/{id}")
+    @PutMapping("/parties/{id}")
     public Party updateParty(@PathVariable(value = "id") Long partyId,
                            @Valid @RequestBody Party partyDetails) {
 
@@ -57,10 +57,10 @@ public class PartyController {
     }
 
     // Delete a Party
-    @DeleteMapping("/notes/{id}")
+    @DeleteMapping("/parties/{id}")
     public ResponseEntity<?> deleteParty(@PathVariable(value = "id") Long partyId) {
         Party note = partyRepository.findById(partyId)
-                .orElseThrow(() -> new ResourceNotFoundException("Note", "id", partyId));
+                .orElseThrow(() -> new ResourceNotFoundException("Party", "id", partyId));
 
         partyRepository.delete(note);
 

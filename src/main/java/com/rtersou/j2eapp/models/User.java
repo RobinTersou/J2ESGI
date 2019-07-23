@@ -1,24 +1,35 @@
 package com.rtersou.j2eapp.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.stereotype.Component;
 
-@Data
 @Entity
-@Component
+@Table(name = "user")
+@EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
+        allowGetters = true)
 public class User {
     private @Id
     @GeneratedValue
     Long id;
 
     private Long id_type_user;
+
+    @NotBlank
     private String lastname;
+
+    @NotBlank
     private String firstname;
+
+    @NotBlank
     private String email;
+
+    @NotBlank
     private String photo_url;
 
 
@@ -31,6 +42,7 @@ public class User {
         this.email = email;
         this.photo_url = photo_url;
     }
+
 
     public Long getId() {
         return id;

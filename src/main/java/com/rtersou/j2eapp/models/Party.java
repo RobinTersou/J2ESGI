@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -23,16 +24,12 @@ public class Party implements Serializable {
     @NotBlank
     private String name;
 
-    @NotBlank
     private Float lng;
 
-    @NotBlank
     private Float lat;
 
-    @NotBlank
     private Date date_start;
 
-    @NotBlank
     private Date date_end;
 
     @Column(nullable = false, updatable = false)
@@ -47,12 +44,23 @@ public class Party implements Serializable {
 
     public Party(){}
 
-    public Party(String name, Float lng, Float lat, Date date_start, Date date_end) {
+    public Party(String name, Float lng, Float lat, String date_start, String date_end) {
         this.name = name;
         this.lng = lng;
         this.lat = lat;
-        this.date_start = date_start;
-        this.date_end = date_end;
+
+        try {
+            this.date_start = new SimpleDateFormat("yyyy-MM-dd").parse(date_start);
+            this.date_end = new SimpleDateFormat("yyyy-MM-dd").parse(date_end);
+            /*
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+            this.date_start = sdf.parse(date_start);
+            this.date_end = sdf.parse(date_end);
+
+             */
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String getName() {

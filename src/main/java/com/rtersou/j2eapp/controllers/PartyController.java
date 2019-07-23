@@ -28,7 +28,7 @@ public class PartyController {
     @GetMapping("/parties/{id}")
     public Party getPartyById(@PathVariable(value = "id") Long partyId) {
         return partyRepository.findById(partyId)
-                .orElseThrow(() -> new ResourceNotFoundException("Note", "id", partyId));
+                .orElseThrow(() -> new ResourceNotFoundException("Party", "id", partyId));
     }
 
     // Create party
@@ -44,13 +44,14 @@ public class PartyController {
                            @Valid @RequestBody Party partyDetails) {
 
         Party party = partyRepository.findById(partyId)
-                .orElseThrow(() -> new ResourceNotFoundException("Note", "id", partyId));
+                .orElseThrow(() -> new ResourceNotFoundException("Party", "id", partyId));
 
         party.setName(partyDetails.getName());
         party.setLat(partyDetails.getLat());
         party.setLng(partyDetails.getLng());
         party.setDate_end(partyDetails.getDate_end());
         party.setDate_start(partyDetails.getDate_start());
+        party.setDescription(partyDetails.getDescription());
 
         Party updateParty = partyRepository.save(party);
         return updateParty;

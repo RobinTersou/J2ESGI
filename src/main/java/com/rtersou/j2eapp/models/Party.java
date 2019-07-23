@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "party")
@@ -32,6 +33,14 @@ public class Party implements Serializable {
 
     private Date date_end;
 
+    @NotBlank
+    private String description;
+
+
+    @OneToMany(mappedBy = "party", cascade = CascadeType.ALL)
+    private Set<Ticket> tickets;
+
+
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
@@ -42,25 +51,29 @@ public class Party implements Serializable {
     @LastModifiedDate
     private Date updatedAt;
 
-    public Party(){}
 
-    public Party(String name, Float lng, Float lat, String date_start, String date_end) {
+    public Party() {}
+
+    public Party(String name, Float lng, Float lat, String date_start, String date_end, String description) {
         this.name = name;
         this.lng = lng;
         this.lat = lat;
-
+        this.description = description;
         try {
             this.date_start = new SimpleDateFormat("yyyy-MM-dd").parse(date_start);
             this.date_end = new SimpleDateFormat("yyyy-MM-dd").parse(date_end);
-            /*
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
-            this.date_start = sdf.parse(date_start);
-            this.date_end = sdf.parse(date_end);
 
-             */
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getName() {

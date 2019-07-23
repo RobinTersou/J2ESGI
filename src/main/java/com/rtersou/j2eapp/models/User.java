@@ -8,6 +8,8 @@ import lombok.Data;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "user")
 @EntityListeners(AuditingEntityListener.class)
@@ -32,6 +34,12 @@ public class User {
     @NotBlank
     private String photo_url;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Ticket> tickets;
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Card> cards;
 
     public User(){}
 

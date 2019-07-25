@@ -20,7 +20,7 @@ import java.util.Set;
 public class Party implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-            Long id;
+    private Long id;
 
     @NotBlank
     private String name;
@@ -40,6 +40,8 @@ public class Party implements Serializable {
     @OneToMany(mappedBy = "party", cascade = CascadeType.ALL)
     private Set<Ticket> tickets;
 
+    @OneToMany(mappedBy = "party", cascade = CascadeType.ALL)
+    private Set<PartyTypeTicket> partyTypeTickets;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -74,6 +76,14 @@ public class Party implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

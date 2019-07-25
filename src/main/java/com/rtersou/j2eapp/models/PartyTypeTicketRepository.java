@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    List<User> findByEmail(String email);
+public interface PartyTypeTicketRepository extends JpaRepository<PartyTypeTicket, Long> {
+    List<PartyTypeTicket> findByPartyIdAndActiveTrue(Long partyId);
 }

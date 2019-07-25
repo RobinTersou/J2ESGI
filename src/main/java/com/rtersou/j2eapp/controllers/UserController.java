@@ -30,6 +30,12 @@ public class UserController {
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
     }
 
+    @GetMapping("/users/email/{email}")
+    public List<User> getUserByEmail(@PathVariable(value = "email") String email) {
+        System.out.println("User connecting : " + email);
+        return userRepository.findByEmail(email);
+    }
+
     // Create party
     @PostMapping("/users")
     public User createUser(@Valid @RequestBody User user) {

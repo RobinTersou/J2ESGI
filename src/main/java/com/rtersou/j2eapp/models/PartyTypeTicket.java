@@ -1,43 +1,42 @@
 package com.rtersou.j2eapp.models;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
-@Table(name = "ticket")
+@Table(name = "partyTypeTicket")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
         allowGetters = true)
-public class Ticket implements Serializable {
-    private @Id
-    @GeneratedValue
-            Long id;
+public class PartyTypeTicket implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "party_id", nullable = false)
     @JsonIgnore
     private Party party;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
-    private User user;
+    @NotBlank
+    private String type_libelle;
 
-    @ManyToOne
-    @JoinColumn(name = "partyTypeTicket_id", nullable = false)
-    @JsonIgnore
-    private PartyTypeTicket partyTypeTicket;
+    private Boolean active;
 
-    private Integer number;
+    private Float price;
+
+    @OneToMany(mappedBy = "partyTypeTicket", cascade = CascadeType.ALL)
+    private Set<Ticket> tickets;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -49,29 +48,13 @@ public class Ticket implements Serializable {
     @LastModifiedDate
     private Date updatedAt;
 
-    public Ticket(){}
+    public PartyTypeTicket() {}
 
-    public Ticket(Party party, Integer number, User user, PartyTypeTicket partyTypeTicket) {
+    public PartyTypeTicket(Party party, @NotBlank String type_libelle, Boolean active, Float price) {
         this.party = party;
-        this.number = number;
-        this.user = user;
-        this.partyTypeTicket = partyTypeTicket;
-    }
-
-    public PartyTypeTicket getPartyTypeTicket() {
-        return partyTypeTicket;
-    }
-
-    public void setPartyTypeTicket(PartyTypeTicket partyTypeTicket) {
-        this.partyTypeTicket = partyTypeTicket;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+        this.type_libelle = type_libelle;
+        this.active = active;
+        this.price = price;
     }
 
     public Long getId() {
@@ -90,11 +73,29 @@ public class Ticket implements Serializable {
         this.party = party;
     }
 
-    public Integer getNumber() {
-        return number;
+    public String getType_libelle() {
+        return type_libelle;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public void setType_libelle(String type_libelle) {
+        this.type_libelle = type_libelle;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
     }
 }
+
+

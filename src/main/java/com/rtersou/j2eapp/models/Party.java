@@ -25,9 +25,9 @@ public class Party implements Serializable {
     @NotBlank
     private String name;
 
-    private Float lng;
+    private float lng;
 
-    private Float lat;
+    private float lat;
 
     private Date date_start;
 
@@ -56,7 +56,7 @@ public class Party implements Serializable {
 
     public Party() {}
 
-    public Party(String name, Float lng, Float lat, String date_start, String date_end, String description) {
+    public Party(String name, float lng, float lat, String date_start, String date_end, String description) {
         this.name = name;
         this.lng = lng;
         this.lat = lat;
@@ -94,19 +94,19 @@ public class Party implements Serializable {
         this.name = name;
     }
 
-    public Float getLng() {
+    public float getLng() {
         return lng;
     }
 
-    public void setLng(Float lng) {
+    public void setLng(float lng) {
         this.lng = lng;
     }
 
-    public Float getLat() {
+    public float getLat() {
         return lat;
     }
 
-    public void setLat(Float lat) {
+    public void setLat(float lat) {
         this.lat = lat;
     }
 

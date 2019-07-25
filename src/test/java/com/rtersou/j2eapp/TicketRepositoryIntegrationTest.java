@@ -25,7 +25,7 @@ public class TicketRepositoryIntegrationTest {
     @Autowired
     private TicketRepository ticketRepository;
 
-    Party party = new Party("Possession", (float)48.323483, (float)2.2893726, "27/08/2019 23h59", "28/08/2019 10h00", "Soirée organisée par une organisation à but non lucratif. Tous les fonds seront reversés à une association")
+    Party party = new Party("Possession", (float)48.323483, (float)2.2893726, "2019-08-27", "2019-08-28", "Soirée organisée par une organisation à but non lucratif. Tous les fonds seront reversés à une association");
     User user = new User(Long.valueOf(1), "Tersou", "Robin", "test@test.fr", "test");
     PartyTypeTicket partyTypeTicket = new PartyTypeTicket(party, "Early Bird", true, Float.valueOf(11));
     Ticket ticket = new Ticket(party, 83747256, user, partyTypeTicket);
@@ -34,11 +34,6 @@ public class TicketRepositoryIntegrationTest {
     @Test
     public void whenFindByPartyId_thenReturnTicket() {
         // given
-
-        Party party = new Party("Possession", (float)48.323483, (float)2.2893726, "27/08/2019 23h59", "28/08/2019 10h00", "Soirée organisée par une organisation à but non lucratif. Tous les fonds seront reversés à une association")
-        User user = new User(Long.valueOf(1), "Tersou", "Robin", "test@test.fr", "test");
-        PartyTypeTicket partyTypeTicket = new PartyTypeTicket(party, "Early Bird", true, Float.valueOf(11));
-        Ticket ticket = new Ticket(party, 83747256, user, partyTypeTicket);
         entityManager.persist(party);
         entityManager.flush();
 

@@ -20,6 +20,7 @@
 		<profile>
 			<id>dev</id>
 			<properties>
+				<build.profile.id>dev</build.profile.id>
 				<activatedProperties>dev</activatedProperties>
 			</properties>
 			<activation>
@@ -29,12 +30,14 @@
 		<profile>
 			<id>recette</id>
 			<properties>
+				<build.profile.id>recette</build.profile.id>
 				<activatedProperties>recette</activatedProperties>
 			</properties>
 		</profile>
 		<profile>
 			<id>prod</id>
 			<properties>
+				<build.profile.id>prod</build.profile.id>
 				<activatedProperties>prod</activatedProperties>
 			</properties>
 		</profile>
